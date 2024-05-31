@@ -1,0 +1,28 @@
+name: Publish package to GitHub Packages
+
+on:
+  push:
+    tags:        
+        - '*'           # Push events to every tag not containing /
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+          registry-url: 'https://registry.npmjs.org'
+      - run: npm install -g npm@6
+      - run: npm i
+      - run: npm ci
+      - run: npm publish --tag beta
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

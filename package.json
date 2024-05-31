@@ -1,0 +1,35 @@
+{
+  "name": "typescript-ode",
+  "version": "0.0.8",
+  "description": "AKA clean architecture. Ode create a guide line style to business layer",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "/dist", "/src"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/v2-softwarehouse/typescript-ode.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "publish-lib": "npm run build && npm publish",
+    "publish-beta": "npm run build && npm publish --tag beta",
+    "publish-dryrun": "npm run build && npm publish --dry-run"
+  },
+  "keywords": [
+    "typescript",
+    "library"
+  ],
+  "author": "V2 SoftwareHouse (v2.softwarehouse@gmail.com)",
+  "license": "MIT",
+  "homepage": "https://v2-softwarehouse.github.io/site-ode/",
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "typescript": "5.2.2"
+  },
+  "dependencies": {
+    "node-schedule": "^2.1.1"
+  }
+}
