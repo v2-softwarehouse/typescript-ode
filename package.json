@@ -1,5 +1,5 @@
 {
-  "name": "typescript-ode",
+  "name": "typescript-ode-test",
   "version": "0.0.1",
   "description": "AKA clean architecture. Ode create a guide line style to business layer",
   "main": "dist/index.js",
