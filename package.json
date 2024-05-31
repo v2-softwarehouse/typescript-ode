@@ -1,6 +1,6 @@
 {
   "name": "typescript-ode",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "AKA clean architecture. Ode create a guide line style to business layer",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
