@@ -2,12 +2,12 @@ name: Publish package to GitHub Packages
 
 on:
   push:
-    tags:        
-        - '*'           # Push events to every tag not containing /
-    branches: [ "main" ]
+    tags:
+      - "*" # Push events to every tag not containing /
+    branches: ["master"]
   pull_request:
-    branches: [ "main" ]
-    
+    branches: ["master"]
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -18,8 +18,8 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: '18.x'
-          registry-url: 'https://registry.npmjs.org'
+          node-version: "18.x"
+          registry-url: "https://registry.npmjs.org"
       - run: npm install -g npm@6
       - run: npm i
       - run: npm ci
