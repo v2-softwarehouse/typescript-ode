@@ -1,23 +1,40 @@
 {
-   "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "sourceMap": true,
-    "allowJs": true,
-    "declarationDir": "dist",
-    "emitDeclarationOnly": true,
-    "outDir": "dist",
-    "strict": true,
-    "esModuleInterop": true,
-    "declaration": true
+  "compilerOptions": {
+    "target": "ES6",                           // Alvo do compilador
+    "module": "commonjs",                      // Sistema de módulos
+    "strict": true,                            // Ativar todas as verificações de tipo estritas
+    "esModuleInterop": true,                   // Habilitar interoperabilidade entre módulos ES e CommonJS
+    "skipLibCheck": true,                      // Ignorar verificações de tipo em arquivos de definição de biblioteca
+    "forceConsistentCasingInFileNames": true,  // Forçar uso consistente de maiúsculas e minúsculas nos nomes dos arquivos
+    "outDir": "./dist",                        // Diretório de saída para os arquivos compilados
+    "rootDir": "./src",                        // Diretório raiz dos arquivos de entrada
+    "declaration": true                        // Gerar arquivos de declaração (.d.ts)
   },
-  "publishConfig": {
-    "provenance": true
-  },
-  "include": [
-    "src"
-  ],
-  "exclude": [
-    "**/*.spec.ts"
-  ]
+  "include": ["src"],                          // Diretório de entrada
+  "exclude": ["node_modules"]                  // Diretório a ser excluído
 }
+
+
+// {
+//    "compilerOptions": {
+//     "target": "es5",
+//     "module": "commonjs",
+//     "sourceMap": true,
+//     "allowJs": true,
+//     "declarationDir": "dist",
+//     "emitDeclarationOnly": true,
+//     "outDir": "dist",
+//     "strict": true,
+//     "esModuleInterop": true,
+//     "declaration": true
+//   },
+//   "publishConfig": {
+//     "provenance": true
+//   },
+//   "include": [
+//     "src"
+//   ],
+//   "exclude": [
+//     "**/*.spec.ts"
+//   ]
+// }
