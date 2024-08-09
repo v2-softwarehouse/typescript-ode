@@ -7,6 +7,7 @@ import { UseCaseDispatcher } from './../business/interactor/UseCaseDispatcher'; 
 import { Output } from './../business/dto/Output'; // Substitua com a implementação real
 import { EventEmitter } from 'events';
 import { Worker } from 'worker_threads';
+import { UseCaseUnit } from '../business/interactor/UseCaseUnit';
 
 export abstract class BaseViewModel extends EventEmitter implements Controller {
     private channels: Map<string, any> = new Map();
@@ -31,10 +32,17 @@ export abstract class BaseViewModel extends EventEmitter implements Controller {
         this.emit(channelName, value);
     }
 
-    public dispatchUseCase<P, R>(param: P | null, useCase: UseCase<P, R>, listener: (output: Output<R>) => void): Worker | null {
-        const dispatcher = new UseCaseDispatcher(new CallbackDecorator(useCase, listener), 'worker', 'worker');
-        const worker = dispatcher.dispatch(param);
+    public async dispatchUseCase<P, R>(param: P | null, useCase: UseCase<P, R>, listener: (output: Output<R>) => void): Promise<Worker> | null {
+        const dispatcher = new UseCaseDispatcher(new CallbackDecorator(useCase, listener));
+        const worker = await dispatcher.dispatch(param);
         this.compositeJobDisposable.add(worker);
         return worker;
+    }
+
+    public async processUseCase<P, R>(param: P | null, useCase: UseCase<P, R>): Promise<Output<R>> {
+        const callback = new UseCaseUnit.Callback<R>();
+        const decorator = new CallbackDecorator(useCase, await callback.set.bind(callback))
+        await decorator.process(param)
+        return callback.output
     }
 }

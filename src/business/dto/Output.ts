@@ -1,5 +1,5 @@
 export abstract class Output<V> {
-    constructor(public value: V | null = null, public error: Error | null = null) {}
+    constructor(public value: V | null = null, public error: Error | null = null) { }
 
     isError(): boolean {
         return this.error !== null;

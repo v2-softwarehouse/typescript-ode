@@ -1,7 +1,7 @@
 
-export class AuthenticationException extends Error {}
+export class AuthenticationException extends Error { }
 
-export class InternetConnectionException extends Error {}
+export class InternetConnectionException extends Error { }
 
 export class HttpException extends Error {
     constructor(public code: number | null, message: string = "") {

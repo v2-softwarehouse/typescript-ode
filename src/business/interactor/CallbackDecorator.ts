@@ -8,12 +8,12 @@ export class CallbackDecorator<P, R> extends UseCaseDecorator<P, R> {
         super(useCase);
     }
 
-    onResult(output: Output<R>) {
+    override async onResult(output: Output<R>) {
         super.onResult(output);
         this.callback(output);
     }
 
-    onError(error: Error) {
+    override async onError(error: Error) {
         super.onError(error);
         this.callback(new ErrorOutput(error));
     }

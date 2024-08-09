@@ -1,38 +1,53 @@
 import { UseCase } from './UseCase';
 import { Output } from './../dto/Output';
 import { UseCaseDecorator } from './UseCaseDecorator';
-import { Worker, parentPort } from 'worker_threads';
-import { ErrorOutput } from '../dto/ErrorOutput';
+import { parentPort, Worker, isMainThread } from 'worker_threads';
 
 export class UseCaseDispatcher<P, R> {
     private decorator: DispatcherDecorator<P, R>;
 
-    constructor(useCase: UseCase<P, R>, private executeOn: string, private resultOn: string) {
-        this.decorator = new DispatcherDecorator(useCase, executeOn, resultOn);
+    constructor(useCase: UseCase<P, R>) {
+        this.decorator = new DispatcherDecorator(useCase);
     }
 
-    dispatch(param: P | null = null): Worker | null {
-        return this.decorator.dispatch(param);
+    async dispatch(param: P | null = null): Promise<Worker> {
+        return await this.decorator.dispatch(param);
     }
 }
 
-class DispatcherDecorator<P, R> extends UseCaseDecorator<P, R> {
-    constructor(public useCaseDispatcher: UseCase<P, R>, private executeOn: string, private resultOn: string) {
-        super(useCaseDispatcher);
+export class DispatcherDecorator<P, R> extends UseCaseDecorator<P, R> {
+    async dispatch(param: P | null = null): Promise<Worker> {
+
+        const process = JSON.parse(JSON.stringify(this.use_case.process(param)));
+        const worker = new Worker(__filename, { workerData: { useCase: process } });
+        if (isMainThread) {
+            worker.on('message', (result) => {
+                this.onResult(result)
+            });
+            worker.on('exit', (exitCode) => {
+            });
+            worker.on('error', (error) => {
+                this.onError(error)
+            });
+        } else {
+            this.process(param);
+        }
+
+        return worker
     }
 
-    dispatch(param: P | null): Worker | null {
-        const worker = new Worker(__filename, { workerData: { param, useCase: this.useCaseDispatcher } });
-        worker.on('message', (result: Output<R>) => this.onResult(result));
-        worker.on('error', (error: Error) => this.onError(error));
-        return worker;
+    override async execute(param: P | null): Promise<Output<R>> {
+        const result = await super.execute(param);
+        parentPort?.postMessage(result);
+
+        return result;
     }
 
-    onError(error: Error) {
-        parentPort?.postMessage(new ErrorOutput(error));
+    async onResult(output?: Output<R>): Promise<void> {
+
     }
 
-    onResult(output: Output<R>) {
-        parentPort?.postMessage(output);
+    async onError(error: Error): Promise<void> {
+
     }
 }
