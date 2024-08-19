@@ -12,6 +12,7 @@ export class ChainedUseCase<P, R, T> extends UseCase<P, T> {
         if (intermediate.isSuccess()) {
             return this.second.execute(intermediate.value);
         }
+
         return new ErrorOutput(intermediate.error!);
     }
 }
