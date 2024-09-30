@@ -15,7 +15,7 @@ export abstract class UseCase<P, R> {
         }
     }
 
-    async execute(param?: P): Promise<Output<R>> {
+    async execute(_param?: P): Promise<Output<R>> {
         throw new Error("Method not implemented.");
     }
 
@@ -23,11 +23,11 @@ export abstract class UseCase<P, R> {
         await this.onResult(new ErrorOutput(error));
     }
 
-    async onResult(output?: Output<R>) {
+    async onResult(_output?: Output<R>) {
         // Implement in subclass
     }
 
-    guard(param?: P): boolean {
+    guard(_param?: P): boolean {
         return true;
     }
 

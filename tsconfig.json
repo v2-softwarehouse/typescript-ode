@@ -1,29 +1,3 @@
-// {
-//    "compilerOptions": {
-//     "target": "es5",
-//     "module": "commonjs",
-//     "sourceMap": true,
-//     "allowJs": true,
-//     "declarationDir": "dist",
-//     "emitDeclarationOnly": true,
-//     "outDir": "dist",
-//     "strict": true,
-//     "esModuleInterop": true,
-//     "declaration": true
-//   },
-//   "publishConfig": {
-//     "provenance": true
-//   },
-//   "include": [
-//     "src"
-//   ],
-//   "exclude": [
-//     "**/*.spec.ts"
-//   ]
-// }
-
-// PEGUEI AS CONFIGS DE TS DO BACKOFFICE DA LANCE PORQUE ESSE ANTIGO TAVA DANDO ALGUNS ERROS, QUALQUER COISA VOLTAMOS DEPOIS
-
 {
   "compilerOptions": {
     "lib": ["es2017"],
@@ -38,7 +12,6 @@
     "module": "commonjs",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true
-    // "strict": true
   },
   "exclude": ["node_modules"]
 }
