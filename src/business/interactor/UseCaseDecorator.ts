@@ -9,16 +9,16 @@ export abstract class UseCaseDecorator<P, R> extends UseCase<P, R> {
         this.use_case = use_case;
     }
 
-    async execute(param?: P): Promise<Output<R>> {
-        return await this.use_case.execute(param);
+    execute(param?: P): Output<R> {
+        return this.use_case.execute(param);
     }
 
-    async onResult(output?: Output<R>) {
-        return await this.use_case.onResult(output);
+    asynconResult(output?: Output<R>) {
+        return this.use_case.onResult(output);
     }
 
-    async onError(error: Error) {
-        return await this.use_case.onError(error);
+    onError(error: Error) {
+        return this.use_case.onError(error);
     }
 
     guard(param?: P): boolean {

@@ -1,11 +1,12 @@
 {
   "name": "typescript-ode",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "AKA clean architecture. Ode create a guide line style to business layer",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
-    "/dist", "/src"
+    "/dist",
+    "/src"
   ],
   "repository": {
     "type": "git",
@@ -26,7 +27,7 @@
   "license": "MIT",
   "homepage": "https://v2-softwarehouse.github.io/site-ode/",
   "devDependencies": {
-    "@types/node": "^20.10.0",
+    "@types/node": "^20.16.10",
     "typescript": "5.2.2"
   },
   "dependencies": {

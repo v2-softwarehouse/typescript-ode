@@ -14,9 +14,9 @@ export class SequenceUseCase extends UseCase<null, Output<any>[]> {
     return new Builder();
   }
 
-  public async execute(param: null): Promise<Output<Output<any>[]>> {
+  public execute(param: null): Output<Output<any>[]> {
     for (const unit of this.units) {
-      const output = await unit.process();
+      const output = unit.process();
       this.stream.push(output);
     }
     return new ValueOutput(this.stream);

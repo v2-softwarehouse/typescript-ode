@@ -12,7 +12,7 @@ export class UseCaseUnit<P, R> {
         this.param = param;
     }
 
-    async process(): Promise<Output<R>> {
+    async process(): Output<R> {
         const callback = new UseCaseUnit.Callback<R>();
         const decorator = new CallbackDecorator(this.use_case, callback.set.bind(callback));
         await decorator.process(this.param);
